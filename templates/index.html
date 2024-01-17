@@ -1,8 +1,20 @@
 <h1>Keskustelusovellus</h1>
+
+{%if session.username%}
+<p>Olet sisällä {{ session.username }}!</p>
+<a href="/logout"> Kirjaudu ulos</a>
+{%endif%}
+
+{% if not session.username %}
+</p>
+<a href="/login">Kirjaudu sisään</a>
 </p>
 <a href="/register">Uusi käyttäjä</a>
 </p>
-<a href="/login">Kirjaudu sisään</a>
+{% endif %}
 
 </p>
 <h2>Viestialueet</h2>
+</p>
+
+tänne tulee keskustelu alueet
