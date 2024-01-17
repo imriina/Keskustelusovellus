@@ -8,9 +8,11 @@ from sqlalchemy.sql import text
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://"
 db = SQLAlchemy(app)
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():  
@@ -20,7 +22,9 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        sql = text("INSERT INTO users (username, password) VALUES (:username, :password1)")
+        if password1 != password2:
+            return redirect("register")
+        sql = f"INSERT INTO users (username,password) VALUES ('{username}','{password1}')"
         db.session.execute(text(sql))
         db.session.commit()
         return redirect("/")
@@ -31,5 +35,8 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     if request.method == "POST":
-        return render_template("index.html")
-    return redirect("/")
+        username = request.form["username"]
+        password = request.form["password"]        
+        return redirect("/")
+    
+    
