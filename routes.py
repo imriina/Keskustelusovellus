@@ -4,6 +4,7 @@ from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from os import getenv
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
@@ -24,10 +25,11 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        role = request.form["role"]
         if password1 != password2:
             return redirect("register")
-        sql = f"INSERT INTO users (username,password) VALUES ('{username}','{password1}')"
-        db.session.execute(text(sql))
+        sql = "INSERT INTO users (username, password, admin) VALUES (:username, :password, :is_admin);"
+        db.session.execute(text(sql), {'username':username, 'password':password1, 'is_admin': role})
         db.session.commit()
         return redirect("/")
 
