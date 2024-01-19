@@ -23,9 +23,10 @@ def register():
         password2 = request.form["password2"]
         role = request.form["role"]
         if password1 != password2:
-            return redirect("register")
+            return render_template("error.html", message="Salasanat eroavat")
         if not users.register(username, password1,role):
             return render_template("register.html")
+        session["username"] = username
         return redirect("/")
 
 
@@ -35,10 +36,15 @@ def login():
         return render_template("login.html")
     if request.method == "POST":
         username = request.form["username"]
-        password = request.form["password"]   
-        session["username"] = username    
+        password = request.form["password"]
+        if not users.login(username, password):
+            return render_template("login.html")   
         return redirect("/")
 
+@app.route("/createTopic", methods=["POST"])
+def createTopic():
+    room = request.form["topic"]
+    rooms.create(room)
     
 @app.route("/logout")
 def logout():

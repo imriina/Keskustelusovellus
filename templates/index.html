@@ -2,6 +2,7 @@
 
 {%if session.username%}
 <p>Olet sisällä {{ session.username }}!</p>
+
 <a href="/logout"> Kirjaudu ulos</a>
 {%endif%}
 
@@ -12,9 +13,14 @@
 <a href="/register">Uusi käyttäjä</a>
 </p>
 {% endif %}
-
 </p>
 <h2>Viestialueet</h2>
 </p>
+{% if session.admin == 1%}
+<form action="/createTopic" method="POST">
+    Uusi huone: 
+    <input type="text" name="topic">
+    <input type="submit" value="Luo">
+</form>
 
-tänne tulee keskustelu alueet
+{% endif %}
