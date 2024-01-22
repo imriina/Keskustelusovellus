@@ -10,8 +10,6 @@ CREATE TABLE rooms (
     topic TEXT,
     user_id INTEGER REFERENCES users,
     sent_at TIMESTAMP
-
-
 );
 
 CREATE TABLE posts (

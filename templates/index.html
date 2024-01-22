@@ -23,4 +23,13 @@
     <input type="submit" value="Luo">
 </form>
 
+
 {% endif %}
+{%if session.username%}
+
+{% for topic in rooms %}
+</br>
+<a href="/messages"> {{ topic[0] }}</a>
+</br>
+{% endfor %}
+{%endif%}

@@ -9,4 +9,4 @@ Sovellus jossa käyttäjä pystyy aloittamaan, sekä liittymään keskustelualue
 - Käyttäjä voi muokata laittamiaan/aloittamiaan viestejä, sekä poistaa ne
 - Ylläpitäjällä samat oikeudet kuin käyttäjällä, sekä kyky poistaa ja luoda keskustelualueita
 - Ylläpitäjä voi tehdä alueista salaisia ja päättää millä käyttäjillä pääsy
-- Kirjautumattomalla käyttäjällä ei pääse näkemään keskusteluja, vain alueet/etusivu siis
+- Kirjautumattomalla käyttäjällä ei pääse osallistumaan keskusteluun

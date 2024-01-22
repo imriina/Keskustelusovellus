@@ -4,13 +4,14 @@ from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from os import getenv
-import users
+import users, rooms
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import db
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    list = rooms.get_list()
+    return render_template("index.html", count=len(list), rooms=list)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -44,7 +45,7 @@ def login():
 @app.route("/createroom", methods=["POST"])
 def createTopic():
     room = request.form["room"]
-    users.createroom(room)
+    rooms.createroom(room)
     return redirect("/")
     
 @app.route("/logout")
@@ -52,3 +53,9 @@ def logout():
     users.logout()
     return redirect("/")
 
+@app.route("/messages")
+def messages():
+    if not session["username"]:
+        return redirect("/")
+    else:
+        return render_template("messages.html") 
