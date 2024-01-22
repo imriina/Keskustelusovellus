@@ -6,7 +6,10 @@ CREATE TABLE users (
 );
 
 CREATE TABLE rooms (
-
+    room_id SERIAL PRIMARY KEY,
+    topic TEXT,
+    user_id INTEGER REFERENCES users,
+    sent_at TIMESTAMP
 
 
 );

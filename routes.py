@@ -41,12 +41,14 @@ def login():
             return render_template("login.html")   
         return redirect("/")
 
-@app.route("/createTopic", methods=["POST"])
+@app.route("/createroom", methods=["POST"])
 def createTopic():
-    room = request.form["topic"]
-    rooms.create(room)
+    room = request.form["room"]
+    users.createroom(room)
+    return redirect("/")
     
 @app.route("/logout")
 def logout():
-    del session["username"]
+    users.logout()
     return redirect("/")
+
