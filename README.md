@@ -11,6 +11,8 @@ Sovellus jossa käyttäjä pystyy aloittamaan, sekä liittymään keskustelualue
 - Ylläpitäjä voi tehdä alueista salaisia ja päättää millä käyttäjillä pääsy
 - Kirjautumattomalla käyttäjällä ei pääse osallistumaan keskusteluun
 
+Nyt sovelluksessa pystyy luomaan käyttäjän jolla on rooli, kirjautumaan ulos, admin pystyy luomaan keskustelualustoja (jotka ei tosin vielä vie minnekkään). 
+
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
 
 DATABASE_URL=postgresql:///imriina
