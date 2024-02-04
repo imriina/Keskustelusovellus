@@ -55,7 +55,4 @@ def logout():
 
 @app.route("/messages")
 def messages():
-    if not session["username"]:
-        return redirect("/")
-    else:
-        return render_template("messages.html") 
+    return render_template("messages.html") 

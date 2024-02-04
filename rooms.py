@@ -22,3 +22,6 @@ def createroom(topic):
 def show_rooms():
 	sql = "SELECT name FROM rooms ORDER BY name"
 	return db.session.execute(text(sql)).fetchall
+
+def delete_room():
+	pass

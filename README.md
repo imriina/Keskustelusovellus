@@ -10,3 +10,19 @@ Sovellus jossa käyttäjä pystyy aloittamaan, sekä liittymään keskustelualue
 - Ylläpitäjällä samat oikeudet kuin käyttäjällä, sekä kyky poistaa ja luoda keskustelualueita
 - Ylläpitäjä voi tehdä alueista salaisia ja päättää millä käyttäjillä pääsy
 - Kirjautumattomalla käyttäjällä ei pääse osallistumaan keskusteluun
+
+Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+
+DATABASE_URL=postgresql:///imriina
+SECRET_KEY=eef030a591621fa508712321ec0fd10f
+Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
+
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r ./requirements.txt
+Määritä vielä tietokannan skeema komennolla
+
+$ psql < schema.sql
+Nyt voit käynnistää sovelluksen komennolla
+
+$ flask run
