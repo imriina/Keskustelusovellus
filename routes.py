@@ -56,3 +56,12 @@ def logout():
 @app.route("/messages")
 def messages():
     return render_template("messages.html") 
+
+@app.route("/delete_room", methods=['POST'])
+def delete_room():
+    room_name = request.form.get("room_name")
+    room_id = rooms.get_room_id(room_name)
+    rooms.delete_room(room_id)
+    return redirect("/")
+
+

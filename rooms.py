@@ -10,6 +10,11 @@ def get_list():
     result = db.session.execute(sql)
     return result.fetchall()	
 
+def get_room_id(topic):
+	sql = db.session.execute(text("SELECT room_id FROM rooms WHERE topic=:topic"), {"topic": topic})
+	room = sql.fetchone()
+	return room[0] if room else None
+
 def createroom(topic):
 	user_id_ad = users.get_user_id()
 	if user_id_ad == 0:
@@ -23,5 +28,7 @@ def show_rooms():
 	sql = "SELECT name FROM rooms ORDER BY name"
 	return db.session.execute(text(sql)).fetchall
 
-def delete_room():
-	pass
+def delete_room(room_id):
+	sql = "DELETE FROM rooms WHERE room_id=:room_id"
+	db.session.execute(text(sql), {"room_id":room_id})
+	db.session.commit()
