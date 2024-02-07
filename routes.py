@@ -47,7 +47,14 @@ def createTopic():
     room = request.form["room"]
     rooms.createroom(room)
     return redirect("/")
-    
+
+@app.route("/createpost", methods=["POST"])
+def createpost():
+    post = request.form["room"]
+    post.createpost(post)
+    return redirect("/")
+
+
 @app.route("/logout")
 def logout():
     users.logout()

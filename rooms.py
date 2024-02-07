@@ -1,4 +1,4 @@
-import users
+import users, post
 from sqlalchemy.sql import text
 from db import db
 from flask import session

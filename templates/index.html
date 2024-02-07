@@ -30,10 +30,11 @@
 {% for topic in rooms %}
 </br>
 <a href="/messages"> {{ topic[0] }}</a>
-
+{% if session.admin == 1%}
 <form action="/delete_room" method="POST">
     <input type="hidden" name="room_name" value="{{ topic[0] }}">
     <button type="submit">Poista</button>
 </form>
+{% endif %}
 </br>
 {% endfor %}
