@@ -24,7 +24,7 @@ $ source venv/bin/activate
 $ pip install -r ./requirements.txt
 Määritä vielä tietokannan skeema komennolla
 
-$ psql < schema.sql
+$ psql < tables.sql
 Nyt voit käynnistää sovelluksen komennolla
 
 $ flask run
