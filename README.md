@@ -15,8 +15,8 @@ Nyt sovelluksessa pystyy luomaan käyttäjän jolla on rooli, kirjautumaan ulos,
 
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
 
-DATABASE_URL=postgresql:///imriina
-SECRET_KEY=eef030a591621fa508712321ec0fd10f
+DATABASE_URL= /sun jutut
+SECRET_KEY= /sun jutut
 Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
 
 $ python3 -m venv venv

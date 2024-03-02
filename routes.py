@@ -4,7 +4,7 @@ from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from os import getenv
-import users, rooms
+import users, rooms, post
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import db
 
@@ -50,8 +50,9 @@ def createTopic():
 
 @app.route("/createpost", methods=["POST"])
 def createpost():
-    post = request.form["room"]
-    post.createpost(post)
+    header = request.form["header"]
+    content = request.form["content"]
+    post.create_post(header, content)
     return redirect("/")
 
 
@@ -60,10 +61,16 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/messages")
-def messages():
-    return render_template("messages.html") 
-
+@app.route("/messages/<room_id>", methods=["GET", "POST"])
+def messages(room_id):
+    if request.method == "GET":
+        topic = rooms.get_room_by_id(room_id)
+        return render_template("messages.html", topic=topic)
+    if request.method == "POST":
+        header = request.form["header"]
+        content = request.form["content"]
+        post.create_post(header, content, room_id)
+        
 @app.route("/delete_room", methods=['POST'])
 def delete_room():
     room_name = request.form.get("room_name")

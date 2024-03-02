@@ -12,7 +12,7 @@ CREATE TABLE rooms (
     sent_at TIMESTAMP
 );
 
-CREATE TABLE posts (
+CREATE TABLE post (
 
 
 );
