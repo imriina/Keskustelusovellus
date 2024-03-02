@@ -1,0 +1,26 @@
+<h1>{{post[3]}}</h1>
+<h3>{{post[4]}}</h3>
+<a href="/">  <h3>Haluuks etusivul</h3></a>
+{%if session.username%}
+    <form action="/post/{{post.post_id}}" method="POST">
+        Uusi kommentti:
+        <b> 
+    </p>
+        Viesti:
+        <input type="text" name="content">
+        <input type="submit" value="Luo">
+    </form>
+{% endif %}
+<p>
+
+{% for comment in comments %}
+    <p>
+    {{ comment.content }}
+    {% if session.admin == 1%}
+        <form action="/delete_comment" method="POST">
+            <input type="hidden" name="comment" value="{{ comment.comment_id }}">
+            <button type="submit">Poista</button>
+        </form>
+    {% endif %}
+    </br>
+{% endfor %}

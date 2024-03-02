@@ -1,29 +1,20 @@
-<h1>{{topic[1]}}</h1>
+täällä juttuja
 
-<a href="/">  <h3>Haluuks etusivul</h3></a>
-{%if session.username%}
-    <form action="/messages/{{topic.room_id}}" method="POST">
-        Uusi postaus:
-        </p>    
-        Aihe:
-        <input type="text" name="header">
-    </p>
-        Viesti:
-        <input type="text" name="content">
-        <input type="submit" value="Luo">
-    </form>
-{%endif%}
-<p>
-    <p> 
 {% for post in posts %}
     <p>
     {%if session.username%}
-    <a href="/post/{{post.post_id}}"> {{ post.header }}</a>
-    {% else %}
-    <b>{{ post.header }}</b>
+        <a href="/post/{{post.post_id}}"> {{ post.header }}</a>
+        {% else %}
+        <b>{{ post.header }}</b>
     {%endif%}
     <p>
     {{post.content}}
+
+    <form action="/remove_from_saved" method="POST">
+        <input type="hidden" name="post" value="{{ post.post_id }}">
+        <button type="submit">Poista tallennetuista</button>
+    </form>
+    
     <p>
     <form action="/add_post_to_saved" method="POST">
         <input type="hidden" name="post" value="{{ post.post_id }}">
