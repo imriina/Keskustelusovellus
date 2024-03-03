@@ -31,7 +31,6 @@ def get_user_id():
     return session.get("id", 0)
 
 
-
 def logout():
 	del session["id"]
 	del session["username"]
