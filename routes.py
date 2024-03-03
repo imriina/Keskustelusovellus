@@ -1,10 +1,10 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, abort
 from flask import Flask
 from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from os import getenv
-import users, rooms, post, comment
+import users, rooms, post, comment, secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import db
 
@@ -19,6 +19,8 @@ def register():
     if request.method == "GET":      
         return render_template("register.html")
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
@@ -36,6 +38,8 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         username = request.form["username"]
         password = request.form["password"]
         if not users.login(username, password):
@@ -44,12 +48,16 @@ def login():
 
 @app.route("/createroom", methods=["POST"])
 def createTopic():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     room = request.form["room"]
     rooms.createroom(room)
     return redirect("/")
 
 @app.route("/createpost", methods=["POST"])
 def createpost():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     header = request.form["header"]
     content = request.form["content"]
     post.create_post(header, content)
@@ -68,6 +76,8 @@ def messages(room_id):
         posts = post.get_posts_by_room_id(room_id)
         return render_template("messages.html", topic=topic, posts=posts)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         header = request.form["header"]
         content = request.form["content"]
         post.create_post(header, content, room_id)
@@ -75,13 +85,17 @@ def messages(room_id):
 
 @app.route("/delete_room", methods=['POST'])
 def delete_room():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     room_name = request.form.get("room_name")
     room_id = rooms.get_room_id(room_name)
     rooms.delete_room(room_id)
     return redirect("/")
 
-@app.route("/delete_post", methods=['POST'])
+@app.route("/delete_post", methods=['POST','GET'])
 def delete_post():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     post_id = request.form.get("post")
     post2 = post.get_post_by_id(post_id)
     room_id = post2.room_id
@@ -102,6 +116,8 @@ def post_page(post_id):
 
 @app.route("/delete_comment", methods=['POST'])
 def delete_comment():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     comment_id = request.form.get("comment")
     comment2 = comment.get_comment_by_id(comment_id)
     post_id = comment2.post_id
@@ -110,6 +126,8 @@ def delete_comment():
 
 @app.route("/search", methods=['POST'])
 def search():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     key = request.form["key"]
     content = post.search(key)
     return render_template("search_results.html", posts=content, key=key)
@@ -122,6 +140,8 @@ def savedposts():
 
 @app.route("/add_post_to_saved", methods=["GET", "POST"])
 def add_post_to_saved():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     post_id = request.form["post"]
     post.add_post_to_saved(post_id)
     post2 = post.get_post_by_id(post_id)
@@ -130,6 +150,8 @@ def add_post_to_saved():
 
 @app.route("/remove_from_saved", methods=['POST'])
 def remove_from_saved():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     post_id = request.form["post"]
     post.remove_from_saved(post_id)
     return redirect("/savedposts")

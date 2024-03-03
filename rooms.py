@@ -4,11 +4,13 @@ from db import db
 from flask import session
 from sqlalchemy.sql import text
 from sqlalchemy import func
+import secrets
 
 def get_list():
-    sql = text("SELECT rooms.topic, users.username, rooms.sent_at, rooms.room_id FROM rooms JOIN users ON rooms.user_id = users.id ORDER BY rooms.room_id;")
-    result = db.session.execute(sql)
-    return result.fetchall()	
+	session["csrf_token"] = secrets.token_hex(16)
+	sql = text("SELECT rooms.topic, users.username, rooms.sent_at, rooms.room_id FROM rooms JOIN users ON rooms.user_id = users.id ORDER BY rooms.room_id;")
+	result = db.session.execute(sql)
+	return result.fetchall()	
 
 def get_room_id(topic):
 	sql = db.session.execute(text("SELECT room_id FROM rooms WHERE topic=:topic"), {"topic": topic})

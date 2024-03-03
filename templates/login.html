@@ -6,4 +6,5 @@ Nimi:
 Salasana:
 <input type="text" name="password">
 <input type="submit" value="Kirjaudu sisään">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>

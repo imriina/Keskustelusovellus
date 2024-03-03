@@ -25,6 +25,7 @@
 <form action="/search" method="POST">
     <input type="text" name="key">
     <input type="submit" value="HAE">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 
@@ -36,6 +37,7 @@
         Uusi huone: 
         <input type="text" name="room">
         <input type="submit" value="Luo">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
 
 
@@ -50,6 +52,7 @@
         <form action="/delete_room" method="POST">
             <input type="hidden" name="room_name" value="{{ topic[0] }}">
             <button type="submit">Poista</button>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
 </br>
