@@ -1,6 +1,13 @@
-Tallennetut postauksesi
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<a href="/"> <h3>Haluuks etusivul</h3></a>
+<body>
+
+
+<h2>Tallennetut postauksesi</h2>
+
+<a href="/">  <h3>Etusivulle</h3></a>
 
 {% for post in posts %}
     <p>
@@ -14,7 +21,7 @@ Tallennetut postauksesi
 
     <form action="/remove_from_saved" method="POST">
         <input type="hidden" name="post" value="{{ post.post_id }}">
-        <button type="submit">Poista tallennetuista</button>
+        <button id="pressingbutton" type="submit">Poista tallennetuista</button>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     
@@ -22,10 +29,12 @@ Tallennetut postauksesi
     {% if session.admin == 1%}
         <form action="/delete_post" method="POST">
             <input type="hidden" name="post" value="{{ post.post_id }}">
-            <button type="submit">Poista</button>
+            <button id="pressingbutton" type="submit">Poista</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
-
-    </br>
+    
+    <br>
 {% endfor %}
+
+</body>

@@ -1,12 +1,21 @@
-<h1>Keskustelusovellus</h1>
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="fin">
 
+<div class="header">
+    <h1>Keskustelusovellus</h1>
+    </div>
+
+<br>
+
+<body>
 {%if session.username%}
-    <p>Olet sisällä {{ session.username }}!</p>
-
+<div class="buttons">
+    Olet sisällä {{ session.username }}!
     <a href="/logout"> Kirjaudu ulos</a>
-    </p>
     <a href="/savedposts">Tallennetut postaukset</a>
-    </p>
+</div>
 
 {%endif%}
 
@@ -24,7 +33,7 @@
 </p>
 <form action="/search" method="POST">
     <input type="text" name="key">
-    <input type="submit" value="HAE">
+    <input id="pressingbutton" type="submit" value="Hae">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
@@ -35,25 +44,33 @@
 {% if session.admin == 1%}
     <form action="/createroom" method="POST">
         Uusi huone: 
+        </p>
         <input type="text" name="room">
-        <input type="submit" value="Luo">
+        <input id="pressingbutton" type="submit" value="Luo">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
 
 
 {% endif %}
 
+</br>
 
 {% for topic in rooms %}
-</br>
+<nav>
+<li>
+
     <a href="/messages/{{topic.room_id}}"> {{ topic[0] }}</a>
     <p>
     {% if session.admin == 1%}
         <form action="/delete_room" method="POST">
             <input type="hidden" name="room_name" value="{{ topic[0] }}">
-            <button type="submit">Poista</button>
+            <input id="pressingbutton" type="submit" value="Poista">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
-</br>
+    <br>
+</nav>
 {% endfor %}
+
+</body>
+</html>

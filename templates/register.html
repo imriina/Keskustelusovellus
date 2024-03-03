@@ -1,10 +1,19 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+
 <h1>Tee käyttäjä</h1>
 </p>
 <form action="/register" method="post">
 Nimi:
 <input type="text" name="username">
+<p>
 Anna salasana:
 <input type="text" name="password1">
+<p>
 Anna salasana uudestaan:
 <input type="text" name="password2">
 </p>
@@ -12,6 +21,9 @@ Rooli:
 <input type="radio" name="role" value="0"> Tavan tallaaja
 <input type="radio" name="role" value="1"> Admin
 
-<input type="submit" value="Luo käyttäjä">
+<input id="pressingbutton" type="submit" value="Luo käyttäjä">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+
+<a href="/">  <h3>Etusivulle</h3></a>
+</body>

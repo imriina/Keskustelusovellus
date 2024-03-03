@@ -1,21 +1,35 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
 <h1>{{topic[1]}}</h1>
 
-<a href="/">  <h3>Haluuks etusivul</h3></a>
+<a href="/">  <h3>Etusivulle</h3></a>
 {%if session.username%}
     <form action="/messages/{{topic.room_id}}" method="POST">
-        Uusi postaus:
+        <h2>Uusi postaus:</h2>
         </p>    
         Aihe:
         <input type="text" name="header">
     </p>
         Viesti:
         <input type="text" name="content">
-        <input type="submit" value="Luo">
+        <input id="pressingbutton" type="submit" value="Luo">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
 {%endif%}
 
+<p>
+<h3>Aloitukset:</h3>
+
+<br>
+
 {% for post in posts %}
+<nav>
+<li>
+
     {% if session.username %}
         <a href="/post/{{post.post_id}}"> {{ post.header }}</a>
     {% else %}
@@ -29,7 +43,7 @@
     {%if session.username%}
         <form action="/add_post_to_saved" method="POST">
             <input type="hidden" name="post" value="{{ post.post_id }}">
-            <button type="submit">Tallenna postaus</button>
+            <button id="pressingbutton" type="submit">Tallenna postaus</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
@@ -37,10 +51,14 @@
         {% if session.admin == 1%}
         <form action="/delete_post" method="POST">
             <input type="hidden" name="post" value="{{ post.post_id }}">
-            <button type="submit">Poista</button>
+            <button id="pressingbutton" type="submit">Poista</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
 
     </br>
+</nav>
 {% endfor %}
+
+
+</body>

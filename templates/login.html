@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+
 <h1>Kirjaudu sisään</h1>
 </p>
 <form action="/login" method="post">
@@ -5,6 +12,10 @@ Nimi:
 <input type="text" name="username">
 Salasana:
 <input type="text" name="password">
-<input type="submit" value="Kirjaudu sisään">
+<input id="pressingbutton" type="submit" value="Kirjaudu sisään">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+
+<a href="/">  <h3>Etusivulle</h3></a>
+
+</body>

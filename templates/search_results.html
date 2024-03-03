@@ -1,7 +1,13 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
 <h1>Hakutulokset</h1>
 
 <h2>{{key}}</h2>
-<a href="/">  <h3>Haluuks etusivul</h3></a>
+<a href="/">  <h3>Etusivulle</h3></a>
 
 
 {% for post in posts %}
@@ -17,10 +23,12 @@
     {% if session.admin == 1%}
         <form action="/delete_post" method="POST">
             <input type="hidden" name="post" value="{{ post.post_id }}">
-            <button type="submit">Poista</button>
+            <button id="pressingbutton" type="submit">Poista</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endif %}
 
     </br>
 {% endfor %}
+
+</body>
