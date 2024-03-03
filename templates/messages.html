@@ -6,7 +6,10 @@
 
 <h1>{{topic[1]}}</h1>
 
+<div class="linktext">
 <a href="/">  <h3>Etusivulle</h3></a>
+</div>
+
 {%if session.username%}
     <form action="/messages/{{topic.room_id}}" method="POST">
         <h2>Uusi postaus:</h2>
@@ -31,7 +34,9 @@
 <li>
 
     {% if session.username %}
+    <div class="linktext">
         <a href="/post/{{post.post_id}}"> {{ post.header }}</a>
+    </div>
     {% else %}
         <b>{{ post.header }}</b>
     {% endif %}

@@ -11,8 +11,10 @@
 
 <body>
 {%if session.username%}
+<div class="urin">
+Olet sisällä {{ session.username }}!
+</div>
 <div class="buttons">
-    Olet sisällä {{ session.username }}!
     <a href="/logout"> Kirjaudu ulos</a>
     <a href="/savedposts">Tallennetut postaukset</a>
 </div>
@@ -28,7 +30,7 @@
 {% endif %}
 
 
-
+<br>
 <h3>Etsi keskusteluja:</h3>
 </p>
 <form action="/search" method="POST">
@@ -58,8 +60,9 @@
 {% for topic in rooms %}
 <nav>
 <li>
-
+    <div class="linktext">
     <a href="/messages/{{topic.room_id}}"> {{ topic[0] }}</a>
+    </div>
     <p>
     {% if session.admin == 1%}
         <form action="/delete_room" method="POST">

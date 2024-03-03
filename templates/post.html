@@ -7,7 +7,11 @@
 <h1>{{post[3]}}</h1>
 <h3>{{post[4]}}</h3>
 {{post[5]}}
-<a href="/">  <h3>Etusivulle</h3></a>
+
+<div class="linktext">
+    <a href="/">  <h3>Etusivulle</h3></a>
+</div>
+
 {%if session.username%}
     <form action="/post/{{post.post_id}}" method="POST">
         <h2>Uusi kommentti:</h2>

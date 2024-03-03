@@ -7,13 +7,18 @@
 <h1>Hakutulokset</h1>
 
 <h2>{{key}}</h2>
-<a href="/">  <h3>Etusivulle</h3></a>
 
+<div class="linktext">
+    <a href="/">  <h3>Etusivulle</h3></a>
+</div>
+    
 
 {% for post in posts %}
     <p>
     {%if session.username%}
+    <div class="linktext">
     <a href="/post/{{post.post_id}}"> {{ post.header }}</a>
+    </div>
     {% else %}
     <b>{{ post.header }}</b>
     {%endif%}
