@@ -51,8 +51,8 @@ def login():
 
 @app.route("/createroom", methods=["POST"])
 def createTopic():
-    if session["csrf_token"] != request.form["csrf_token"]:
-        abort(403)
+    # if session["csrf_token"] != request.form["csrf_token"]:
+    #     abort(403)
     room = request.form["room"]
     rooms.createroom(room)
     return redirect("/")
