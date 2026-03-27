@@ -3,6 +3,7 @@ from db import db
 from flask import session
 from os import getenv, urandom
 import secrets
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def validate_password(password):
@@ -16,8 +17,9 @@ def validate_password(password):
 def register(username, password, role):
     if not validate_password(password):
         return "invalid_password"
+    password_hash = generate_password_hash(password)
     sql = "INSERT INTO users (username, password, admin) VALUES (:username, :password, :is_admin);"
-    db.session.execute(text(sql), {'username':username, 'password':password, 'is_admin': role})
+    db.session.execute(text(sql), {'username':username, 'password':password_hash, 'is_admin': role})
     db.session.commit()
     return login(username, password)
 
@@ -27,7 +29,7 @@ def login(username, password):
 	user = returning.fetchone()
 	if not user:
 		return False
-	if user[0] != password:
+	if not check_password_hash(user[0], password):
 		return "wrong_password"
 	session["id"] = user[1]
 	session["username"] = username
