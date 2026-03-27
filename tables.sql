@@ -16,7 +16,7 @@ CREATE TABLE post (
     post_id SERIAL PRIMARY KEY,
     room_id INT NOT NULL,
     maker_id INT NOT NULL,
-    header TEXT NOT NULL
+    header TEXT NOT NULL,
     content TEXT NOT NULL,
     time TIMESTAMP,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE,
