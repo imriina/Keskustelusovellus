@@ -41,7 +41,7 @@
         <b>{{ post.header }}</b>
     {% endif %}
     <p>
-    {{post.content}}
+    {{post.content | e}}
     <p>
     {{post.time}}        
     <p>
