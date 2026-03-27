@@ -16,6 +16,17 @@ Salasana:
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 <div class="linktext">
     <a href="/">  <h3>Etusivulle</h3></a>
 </div>

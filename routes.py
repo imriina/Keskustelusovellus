@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, session, abort
-from flask import Flask
+from flask import Flask, flash
 from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
@@ -107,6 +107,9 @@ def delete_post():
 
 @app.route("/post/<post_id>", methods=["GET", "POST"])
 def post_page(post_id):
+    if "username" not in session:
+        flash("Kirjaudu sisään nähdäksesi postauksen sisällön.")
+        return redirect("/login")
     if request.method == "GET":
         post2 = post.get_post_by_id(post_id)
         comments = comment.get_comments_by_post_id(post_id)
