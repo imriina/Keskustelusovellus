@@ -51,8 +51,8 @@ def login():
 
 @app.route("/createroom", methods=["POST"])
 def createTopic():
-    # if session["csrf_token"] != request.form["csrf_token"]:
-    #     abort(403)
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     room = request.form["room"]
     rooms.createroom(room)
     return redirect("/")
@@ -115,6 +115,8 @@ def post_page(post_id):
         comments = comment.get_comments_by_post_id(post_id)
         return render_template("post.html", post=post2, comments=comments)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         content = request.form["content"]
         comment.create_comment(content, post_id)
         return redirect(f"/post/{post_id}")
