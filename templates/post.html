@@ -28,7 +28,7 @@
 {% for comment in comments %}
 <nav>
 <li>
-    {{ comment.content }}
+    <p>{{ comment.content | e }}</p>
     <p>
     {{ comment.time }}
     {% if session.admin == 1%}
