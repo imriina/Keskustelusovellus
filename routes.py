@@ -27,7 +27,10 @@ def register():
         role = request.form["role"]
         if password1 != password2:
             return render_template("error.html", message="Salasanat eroavat")
-        if not users.register(username, password1,role):
+        result = users.register(username, password1, role)
+        if result == "invalid_password":
+            return render_template("register.html", error_message="Salasana ei täytä vaatimuksia: vähintään 8 merkkiä, enintään 20 merkkiä, ja pitää sisältää sekä kirjaimia että numeroita.")
+        if not result:
             return render_template("register.html")
         session["username"] = username
         return redirect("/")
