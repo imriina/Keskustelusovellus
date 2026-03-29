@@ -38,5 +38,3 @@ psql < tables.sql
 Nyt voit käynnistää sovelluksen komennolla
 
 flask run
-
-Hyvää kevättä <3
